@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api")
 public class ClienteController {
 
     @Autowired
@@ -43,7 +44,7 @@ public class ClienteController {
         return convertToResource(clienteService.getClienteByCuentaId(cuentaId));
     }
 
-    @Operation(summary = "Get a new Service by its Id", description = "Get Cliente its Id", tags = {"clientes"})
+    @Operation(summary = "Get Cliente by its Id", description = "Get Cliente its Id", tags = {"clientes"})
     @GetMapping("/clientes/{clienteId}")
     public ClienteResource getClienteById(@PathVariable Long clienteId){
         return convertToResource(clienteService.getClienteById(clienteId));

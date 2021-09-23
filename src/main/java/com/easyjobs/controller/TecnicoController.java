@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api")
 public class TecnicoController {
 
     @Autowired
@@ -50,7 +51,7 @@ public class TecnicoController {
     }
 
     @Operation(summary = "Get Tecnico by its Dni", description = "Get Tecnico by its Dni", tags = {"tecnicos"})
-    @GetMapping("/tecnicos/{tecnicoDni}")
+    @GetMapping("/tecnicos/dni/{tecnicoDni}")
     public TecnicoResource getTecnicoByDni(@PathVariable Long tecnicoDni){
         return convertToResource(tecnicoService.getTecnicoByDni(tecnicoDni));
     }

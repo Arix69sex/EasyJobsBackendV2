@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/api")
 public class CuentaController {
 
     @Autowired
@@ -38,7 +39,7 @@ public class CuentaController {
     }
 
     @Operation(summary = "Get All Cuentas by Tipo", description = "Get All Cuentas by Tipo", tags = {"cuentas"})
-    @GetMapping("/cuentas/{tipo}")
+    @GetMapping("/cuentas/type/{tipo}")
     public Page<CuentaResource> getAllCuentasByTipo(@PathVariable String tipo, Pageable pageable){
         Page<Cuenta> cuentaPage = cuentaService.getAllCuentasByTipo(pageable, tipo);
         List<CuentaResource> resources = cuentaPage.getContent()
@@ -55,19 +56,19 @@ public class CuentaController {
     }
 
     @Operation(summary = "Get Cuenta by Email", description = "Get Cuenta by Email", tags = {"cuentas"})
-    @GetMapping("/cuentas/{cuentaEmail}")
+    @GetMapping("/cuentas/email/{cuentaEmail}")
     public CuentaResource GetCuentasByEmail(@PathVariable String cuentaEmail){
         return convertToResource(cuentaService.getCuentaByEmail(cuentaEmail));
     }
 
     @Operation(summary = "Get Cuenta by Username", description = "Get Cuenta by Username", tags = {"cuentas"})
-    @GetMapping("/cuentas/{cuentaUsername}")
+    @GetMapping("/cuentas/username/{cuentaUsername}")
     public CuentaResource GetCuentasByUsername(@PathVariable String cuentaUsername){
-        return convertToResource(cuentaService.getCuentaByEmail(cuentaUsername));
+        return convertToResource(cuentaService.getCuentaByUsername(cuentaUsername));
     }
 
     @Operation(summary = "Create Cuenta", description = "Create a new Cuenta", tags = {"cuentas"})
-    @PostMapping("/cuentas/")
+    @PostMapping("/cuentas")
     public CuentaResource createCuenta(@Valid @RequestBody SaveCuentaResource resource){
         Cuenta cuenta = convertToEntity(resource);
         return convertToResource(cuentaService.createCuenta(cuenta));
